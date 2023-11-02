@@ -2,6 +2,46 @@
 <html>
 
 <head>
+
+	<style>
+		/* Style for the Scroll to Top Button */
+		#scrollToTopButton {
+			display: none;
+			/* Initially hide the button */
+			position: fixed;
+			bottom: 20px;
+			/* Adjust the button's vertical position */
+			right: 20px;
+			/* Adjust the button's horizontal position */
+			z-index: 1;
+			/* Ensure it's on top of other elements */
+			background-color: #0a0a0a;
+			/* Button background color */
+			color: #fff;
+			/* Text color */
+			border: none;
+			border-radius: 50%;
+			/* Rounded button shape */
+			padding: 10px 20px;
+			/* Adjust padding as needed */
+			font-size: 16px;
+			cursor: pointer;
+			transition: background-color 0.3s, transform 0.3s;
+		}
+
+		#scrollToTopButton:hover {
+			background-color: #888a8b;
+			/* Change background color on hover */
+		}
+
+		/* Style for button icon (optional) */
+		#scrollToTopButton::before {
+			content: "\2191";
+			/* Unicode character for an upward arrow */
+			font-size: 24px;
+		}
+	</style>
+
 	<meta charset="utf-8">
 	<meta http-equiv="X-UA-Compatible" content="IE=edge">
 	<title>Nishanth</title>
@@ -260,6 +300,37 @@
 		</footer>
 
 	</div>
+
+	<button id="scrollToTopButton">&nbsp;Top</button>
+
+	<script>
+		// Get a reference to the button element
+		var scrollToTopButton = document.getElementById("scrollToTopButton");
+
+		// Add a scroll event listener
+		window.onscroll = function () {
+			// If the user has scrolled 100 pixels or more, show the button; otherwise, hide it
+			if (document.body.scrollTop > 100 || document.documentElement.scrollTop > 100) {
+				scrollToTopButton.style.display = "block";
+			} else {
+				scrollToTopButton.style.display = "none";
+			}
+		};
+
+		// Function to scroll to the top of the page smoothly
+		function scrollToTop() {
+			var currentPosition = document.documentElement.scrollTop || document.body.scrollTop;
+			if (currentPosition > 0) {
+				window.requestAnimationFrame(scrollToTop);
+				window.scrollTo(0, currentPosition - currentPosition / 8);
+			}
+		}
+
+		// Add a click event listener to trigger the smooth scroll
+		scrollToTopButton.addEventListener("click", function () {
+			scrollToTop();
+		});
+	</script>
 
 	<!-- jQuery -->
 	<script src="js/jquery.min.js"></script>
